@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Categoria, Conta
 from django.contrib import messages
 from django.contrib.messages import constants
-from .utius import calcula_total 
+from .utils import calcula_total 
 
 def home(request):
     contas = Conta.objects.all()   
