@@ -53,6 +53,15 @@ def deletar_banco(request, id):
 def cadastrar_categoria(request):
     nome = request.POST.get('categoria')
     essencial = bool(request.POST.get('essencial'))
+    cat = Categoria.objects.filter(categoria=nome).all()
+    if len(cat) > 0:
+        messages.add_message(request, constants.ERROR, 'Categoria já cadastrada')
+        return redirect('/perfil/gerenciar')
+    
+    if len(nome.strip()) == 0:
+        messages.add_message(request, constants.ERROR, 'Campo categoria não pode ser vazio')
+        return redirect('/perfil/gerenciar')
+   
     categoria = Categoria(categoria=nome, essencial=essencial)
     categoria.save()
     
