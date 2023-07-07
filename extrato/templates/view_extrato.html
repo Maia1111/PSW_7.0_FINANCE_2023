@@ -6,7 +6,7 @@
     <link href="{% static 'perfil/css/gerenciar.css' %}" rel="stylesheet">
     <link href="{% static 'extrato/css/view_extrato.css' %}" rel="stylesheet">
 
-    {% block 'title' %}{% endblock %}
+    {% block 'title' %}Extrato{% endblock %}
 
 {% endblock %}
 
@@ -53,7 +53,7 @@
                     <input style="width: 100%; margin-top: 2px;" type="button" class="btn btn-secondary" id="meuBotao" value="Limpar filtro">
                 </div>
                 <div class="col-md-2">
-                    <a href="" style="width: 100%; margin-top: 2px;" class="btn btn-secondary">Exportar extrato</a>
+                    <a href="{% url 'exportar_pdf'%}" style="width: 100%; margin-top: 2px;" class="btn btn-secondary" target="_blank">Exportar extrato</a>
                 </div>
             </div>
         </form>

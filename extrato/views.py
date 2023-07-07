@@ -1,10 +1,17 @@
 from django.shortcuts import render, redirect
 from perfil.models import Categoria, Conta
 from .models import Valores
-from django.http import HttpResponse
+from django.http import HttpResponse , FileResponse
 from django.contrib import messages
 from django.contrib.messages import constants
 from datetime import datetime, timedelta
+from django.template.loader import render_to_string
+import os
+from django.conf import settings
+from weasyprint import HTML
+from io import BytesIO
+
+
 
 def novo_valor(request):
     if request.method == 'GET':
@@ -89,3 +96,23 @@ def view_extrato(request):
 
 def zerar_filtro(request):
     return redirect('/extrato/view_extrato')
+
+
+def exportar_pdf(request):
+    valores = Valores.objects.filter(data__month=datetime.now().month)
+
+    path_template = os.path.join(settings.BASE_DIR, 'templates/partials/extrato.html')      
+    template_render =  render_to_string(path_template, {'valores': valores})
+
+    path_output = BytesIO()
+    HTML(string=template_render).write_pdf(path_output)
+    path_output.seek(0)
+    return FileResponse(path_output, filename="extratro.pdf")
+     
+
+   
+   
+   
+
+
+    
