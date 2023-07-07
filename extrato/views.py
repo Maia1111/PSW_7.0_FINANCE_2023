@@ -4,12 +4,14 @@ from .models import Valores
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.messages import constants
+from datetime import datetime, timedelta
 
 def novo_valor(request):
     if request.method == 'GET':
         categorias = Categoria.objects.all()
         contas = Conta.objects.all()
         return render(request, 'novo_valor.html', {'categorias': categorias, 'contas': contas})
+    
     elif request.method == 'POST':
         valor = request.POST.get('valor')
         categoria = request.POST.get('categoria')
@@ -56,3 +58,34 @@ def novo_valor(request):
         conta.save()
         messages.add_message(request, constants.SUCCESS, 'Saída cadastrada com sucesso')
     return redirect('/extrato/novo_valor')
+
+
+def view_extrato(request):
+    categorias = Categoria.objects.all()
+    contas = Conta.objects.all()
+
+    opcao_padrao = 0
+
+    conta_get = request.GET.get('conta')
+    categoria_get = request.GET.get('categoria')
+    data_get = request.GET.get('periodo')    
+    valores = Valores.objects.all()
+
+    if conta_get:
+        valores = valores.filter(conta_id=conta_get)
+    
+    if categoria_get:
+        valores = valores.filter(categoria_id=categoria_get)
+    
+    if data_get:
+        data_atual = datetime.now().date()
+        dias = int(data_get)        
+        data_filtro = data_atual - timedelta(days=dias)
+        valores = valores.filter(data__gte=data_filtro, data__lte=data_atual)
+
+    return render(request, 'view_extrato.html', {'valores': valores, 'categorias': categorias, 'contas': contas, 'opcao_padrao': opcao_padrao})
+
+
+
+def zerar_filtro(request):
+    return redirect('/extrato/view_extrato')
