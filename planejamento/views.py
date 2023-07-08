@@ -14,12 +14,17 @@ def definir_planejamento(request):
     return render(request, 'definir_planejamento.html', {'categorias': categorias})
 
 
+import json
+
 def update_valor_planejamento_categoria(request, id):      
     novo_valor = json.load(request)['novo_valor']
     categoria = Categoria.objects.filter(id=id)
-    categoria.update(valor_planejamento=novo_valor)
-    return JsonResponse({'status':'sucesso'})
+    try:
+        categoria.update(valor_planejamento=novo_valor)
+        print('Sucesso')
+        return JsonResponse({'status':'sucesso'})
 
+    except Exception as e:
+        return JsonResponse({'status':'erro', 'message': str(e)})
 
-    
    

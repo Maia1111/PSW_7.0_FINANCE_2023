@@ -63,14 +63,13 @@
             return result.json();
         }).then(function (data) {
             console.log(data); // Verifique a resposta do servidor
-            if (data['status'] == 'ok') {
+            if (data['status'] == 'sucesso') {
                 alert('Valor atualizado com sucesso!');
             } else {
                 alert('Erro ao atualizar valor!');
             }
-        }).catch(function (error) {
-            console.log(error); // Exiba qualquer erro no console
-        });
+        })
+        
     }
 
 </script>
