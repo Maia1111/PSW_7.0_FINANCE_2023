@@ -2,42 +2,78 @@
 {% load static %}
 {% block 'head' %}
 
-    <link href="{% static 'perfil/css/home.css' %}" rel="stylesheet">
-    <link href="{% static 'perfil/css/gerenciar.css' %}" rel="stylesheet">
-    <link href="{% static 'extrato/css/view_extrato.css' %}" rel="stylesheet">
+<link href="{% static 'perfil/css/home.css' %}" rel="stylesheet">
+<link href="{% static 'perfil/css/gerenciar.css' %}" rel="stylesheet">
+<link href="{% static 'extrato/css/view_extrato.css' %}" rel="stylesheet">
 
 {% endblock %}
 
 {% block 'body' %}
 
-    <div class="container">
-        <br>
-        <br>
-        <p class="fonte-destaque">Definir planejamento</p>
-        <div class="card">
-        
-            <table>
-                <tr>
-                    <th>Categoria</th>
-                    <th>Valor</th>
-                    <th>Ação</th>
-                </tr>
+<div class="container">
+    <br>
+    <br>
+    <p class="fonte-destaque">Definir planejamento</p>
+    <div class="card">
 
-                {% for categoria in categorias %}
-                    <tr class="linha">
-                        <td>{{categoria}}</td>
-                        <td><input type="number" class="form-control" value="{{categoria.valor_planejamento}}"></td>
-                        <td><button style="width: 100%;" class="botao-secundario">Salvar</button></td>         
-                    </tr>
-                {% endfor %}
-                
+        <table>
+            <tr>
+                <th>Categoria</th>
+                <th>Valor</th>
+                <th>Ação</th>
+            </tr>
 
-            </table>
-        
+            {% for categoria in categorias %}
+            <tr class="linha">
+                <td>{{categoria}}</td>
+                <td><input type="number" id="valor-categoria-{{categoria.id}}" class="form-control"
+                        value="{{categoria.valor_planejamento}}"></td>
+                <td><button onclick="update_valor_planejamento_categoria('{{categoria.id}}')" style="width: 100%;"
+                        class="botao-secundario">Salvar</button></td>
+            </tr>
+            {% endfor %}
 
-        </div>
+
+        </table>
+
+
     </div>
+</div>
 
+<input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+
+
+<script>
+
+    function update_valor_planejamento_categoria(id) {
+
+        var valor = document.getElementById('valor-categoria-' + id).value;
+        var csrfToken = document.getElementById('csrf_token').value;
+
+        fetch('/planejamento/update_valor_planejamento_categoria/' + id, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify({
+                'novo_valor': valor
+            })
+        }).then(function (result) {
+            return result.json();
+        }).then(function (data) {
+            console.log(data); // Verifique a resposta do servidor
+            if (data['status'] == 'ok') {
+                alert('Valor atualizado com sucesso!');
+            } else {
+                alert('Erro ao atualizar valor!');
+            }
+        }).catch(function (error) {
+            console.log(error); // Exiba qualquer erro no console
+        });
+    }
+
+</script>
 
 
 
