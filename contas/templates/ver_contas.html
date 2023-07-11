@@ -87,7 +87,7 @@
                 </div>
                 <br>
                 <br>
-                <p class="fonte-destaque">Restantes</p>
+                <p class="fonte-destaque" style="color: rgb(163, 163, 13);">Restantes</p>
                 <div class="card">
 
                     {% if not outras_contas_pagar %}
@@ -125,7 +125,9 @@
                 <br>
                 <span style="color: red;">Contas vencidas: {{total_vencidas}}</span> <br><br>
                 <span style="color: #E96363;">Contas com vencimento próximo: {{total_proximas_vencimento}}</span> <br><br>
-                <span style="color: rgb(150, 150, 84);">Contas Futuras: {{total_outras_contas_pagar}}</span><br>
+                <span style="color: rgb(150, 150, 84);">Contas Futuras: {{total_outras_contas_pagar}}</span><br><br>
+                <span style="color: rgb(24, 165, 19);">Contas Pagas: {{total_contas_pagas}}</span><br>
+            </div>
             </div>
             
 

@@ -54,7 +54,9 @@ def ver_contas(request):
     total_vencidas = len(contas_vencidas)
     total_proximas_vencimento = len(contas_proximas_vencimento)
     total_outras_contas_pagar = len(outras_contas_pagar)
+    total_contas_pagas = len(contas_pagas)
     print(total_outras_contas_pagar)
+
     print(contas_vencidas)
     print(outras_contas_pagar)
     
@@ -68,7 +70,8 @@ def ver_contas(request):
                                                'outras_contas_pagar':outras_contas_pagar,
                                                'total_vencidas': total_vencidas,
                                                'total_proximas_vencimento': total_proximas_vencimento,
-                                               'total_outras_contas_pagar': total_outras_contas_pagar,})
+                                               'total_outras_contas_pagar': total_outras_contas_pagar,
+                                               'total_contas_pagas': total_contas_pagas,})
 
 
 
