@@ -8,7 +8,7 @@
         .linha-conta{
 
             background-color: var(--dark-color);
-            padding: 20px;
+            padding: 30px;
             border-radius: 10px;
 
         }
@@ -45,7 +45,7 @@
                                         Dia:{{conta.dia_pagamento}}
                                     </div>
                                     <div class="col-md text-center">
-                                        <a href="#" class="botao-principal">PAGAR</a>
+                                        <a href="#" class="botao-principal" style="padding-top: 5px;" >PAGAR</a>
                                     </div> 
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                                             Dia:{{conta.dia_pagamento}}
                                         </div>
                                         <div class="col-md text-center">
-                                            <a href="#" class="botao-principal">PAGAR</a>
+                                            <a href="#" class="botao-principal" style="padding-top: 5px;" >PAGAR</a>
                                         </div> 
                                     </div>
                                 </div>
@@ -104,7 +104,7 @@
                                     Dia:{{conta.dia_pagamento}}
                                 </div>
                                 <div class="col-md text-center">
-                                    <a href="#" class="botao-principal">PAGAR</a>
+                                    <a href="#" class="botao-principal" style="padding-top: 5px;;">PAGAR</a>
                                 </div> 
                             </div>
                         </div>     
@@ -119,8 +119,15 @@
 
             </div>
 
-            <div class="col-md-4">
+            <div style="border: 1px solid; border-color: blue; margin-top: 5px; border-radius: 5px; text-align: center;" class="col-md-4">
+                <span class="fonte-destaque align-center">Relatório Resumo</span>
+                <br>
+                <br>
+                <span style="color: red;">Contas vencidas: {{total_vencidas}}</span> <br><br>
+                <span style="color: #E96363;">Contas com vencimento próximo: {{total_proximas_vencimento}}</span> <br><br>
+                <span style="color: rgb(150, 150, 84);">Contas Futuras: {{total_outras_contas_pagar}}</span><br>
             </div>
+            
 
         </div>
 

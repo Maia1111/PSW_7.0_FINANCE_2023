@@ -51,7 +51,10 @@ def ver_contas(request):
     contas_proximas_vencimento = contas.filter(dia_pagamento__lte=DIA_ATUAL+5).filter(dia_pagamento__gte=DIA_ATUAL).exclude(id__in=contas_pagas)
     outras_contas_pagar = contas.exclude(id__in=contas_vencidas).exclude(id__in=contas_proximas_vencimento).exclude(id__in=contas_pagas)
 
-    
+    total_vencidas = len(contas_vencidas)
+    total_proximas_vencimento = len(contas_proximas_vencimento)
+    total_outras_contas_pagar = len(outras_contas_pagar)
+    print(total_outras_contas_pagar)
     print(contas_vencidas)
     print(outras_contas_pagar)
     
@@ -59,7 +62,13 @@ def ver_contas(request):
     
    
    
-    return render(request, 'ver_contas.html', {'contas': contas, 'contas_vencidas': contas_vencidas, 'contas_proximas_vencimento': contas_proximas_vencimento, 'outras_contas_pagar':outras_contas_pagar})
+    return render(request, 'ver_contas.html', {'contas': contas, 
+                                               'contas_vencidas': contas_vencidas, 
+                                               'contas_proximas_vencimento': contas_proximas_vencimento,
+                                               'outras_contas_pagar':outras_contas_pagar,
+                                               'total_vencidas': total_vencidas,
+                                               'total_proximas_vencimento': total_proximas_vencimento,
+                                               'total_outras_contas_pagar': total_outras_contas_pagar,})
 
 
 
