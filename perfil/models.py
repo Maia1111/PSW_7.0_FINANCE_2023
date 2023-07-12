@@ -17,6 +17,8 @@ class Categoria(models.Model):
         for valor in valores:
                total_valor += valor.valor
         return total_valor
+     
+     
         
      
     
