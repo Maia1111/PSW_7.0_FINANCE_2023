@@ -85,10 +85,14 @@ def cadastrar_banco(request):
 
 
 def deletar_banco(request, id):
-    conta = Conta.objects.get(id=id)
-    conta.delete()
-    messages.add_message(request, constants.SUCCESS, 'Conta deletada com sucesso')
-    return redirect('/perfil/gerenciar')
+    try:
+        conta = Conta.objects.get(id=id)
+        conta.delete()
+        messages.add_message(request, constants.SUCCESS, 'Conta deletada com sucesso')
+        return redirect('/perfil/gerenciar')
+    except Exception as e:
+        messages.add_message(request, constants.ERROR, 'Erro ao deletar conta')
+        return redirect('/perfil/gerenciar')
 
 
 def cadastrar_categoria(request):
