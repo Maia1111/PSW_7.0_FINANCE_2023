@@ -127,12 +127,19 @@
                 <span style="color: #E96363;">Contas com vencimento próximo: {{total_proximas_vencimento}}</span> <br><br>
                 <span style="color: rgb(150, 150, 84);">Contas Futuras: {{total_outras_contas_pagar}}</span><br><br>
                 <span style="color: rgb(24, 165, 19);">Contas Pagas: {{total_contas_pagas}}</span><br><br>
+                <div class="col-md text-center">
+                    <a href="{% url 'view_extrato'%}" class="botao-principal" style="padding-top: 5px;;">Acessar Extato</a>
+                </div>              
+           
             </div>
-            </div>
-            
+
+
+           
 
         </div>
 
     </div>
-
+</div>
 {% endblock %}
+
+
